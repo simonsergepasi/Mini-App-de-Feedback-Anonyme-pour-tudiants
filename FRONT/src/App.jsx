@@ -11,6 +11,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("Tous");
   const [responseMessage, setResponseMesssage] = useState("");
   const [visibleCount, setVisibleCount] = useState(4);
+  console.log(text);
 
   useEffect(() => {
     async function fetchData() {
@@ -83,21 +84,32 @@ function App() {
                 </select>
               </label>
             </div>
-            <textarea
-              placeholder="Laisse ton feedback ici..."
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              rows="4"
-              className="feedback-textarea"
-            />
+            <div className="textarea-wrapper">
+              <textarea
+                placeholder="Laisse ton feedback ici..."
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                rows="4"
+                className="feedback-textarea"
+              />
+              <p
+                className="char-counter"
+                style={{
+                  color: text.length <= 10 ? "red" : "green",
+                }}
+              >
+                {text.length} / 255
+              </p>
+            </div>
+
             <div className="center flex-col">
               <button
                 type="submit"
                 className={`submit-button ${
-                  text.trim().length < 8 ? "disabled" : ""
+                  text.trim().length < 11 ? "disabled" : ""
                 }`}
-                disabled={text.trim().length < 8}
-                aria-disabled={text.trim().length < 8}
+                disabled={text.trim().length < 11}
+                aria-disabled={text.trim().length < 11}
               >
                 Envoyer
               </button>

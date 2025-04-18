@@ -104,6 +104,8 @@ form {
 }
 
 .filter-section {
+  display: flex;
+  justify-content: center;
   margin-bottom: 1rem;
   color: #2c363f;
   font-size: 1.2rem;
@@ -173,4 +175,17 @@ form {
   border-radius: 6px;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #e75a7c;
+}
+
+.textarea-wrapper {
+  position: relative;
+  width: 100%;
+}
+.char-counter {
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 0.7rem;
 }
