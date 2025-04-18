@@ -90,7 +90,7 @@ function App() {
             <button type="submit" className="submit-button">
               Envoyer
             </button>
-            <div className="error-message">
+            <div className="message">
               {responseMessage && <p>{responseMessage}</p>}
             </div>
           </div>
