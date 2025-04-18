@@ -57,6 +57,17 @@ select {
   cursor: pointer;
 }
 
+.show-more-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  background-color: #0e60da;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
 .filter-section {
   margin-bottom: 1rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
