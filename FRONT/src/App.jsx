@@ -10,7 +10,7 @@ function App() {
   const [category, setCategory] = useState("Cours");
   const [selectedCategory, setSelectedCategory] = useState("Tous");
   const [responseMessage, setResponseMesssage] = useState("");
-  const [visibleCount, setVisibleCount] = useState(3); // 👈 Nombre affiché
+  const [visibleCount, setVisibleCount] = useState(3); 
 
   useEffect(() => {
     async function fetchData() {
@@ -30,7 +30,6 @@ function App() {
     fetchData();
   }, []);
 
-  // 👇 Reset visibleCount quand on change de filtre
   useEffect(() => {
     setVisibleCount(3);
   }, [selectedCategory]);
@@ -62,7 +61,7 @@ function App() {
       ? feedbacks
       : feedbacks.filter((fb) => fb.category === selectedCategory);
 
-  const displayedFeedbacks = filteredFeedbacks.slice(0, visibleCount); // 👈 Feedbacks affichés
+  const displayedFeedbacks = filteredFeedbacks.slice(0, visibleCount);
 
   return (
     <div className="app-container">
