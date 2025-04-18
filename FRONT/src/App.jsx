@@ -11,28 +11,26 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("Tous");
   const [responseMessage, setResponseMesssage] = useState("");
   const [visibleCount, setVisibleCount] = useState(4);
-
+  
   useEffect(() => {
     async function fetchData() {
       try {
         const data = await getFeedbacks();
         if (data) {
-          const sortedFeedbacks = data.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-          setFeedbacks(sortedFeedbacks);
+          setFeedbacks(data);
         }
       } catch (err) {
         console.error("Erreur lors du chargement des feedbacks :", err);
       }
     }
-
     fetchData();
   }, []);
-
   useEffect(() => {
-    setVisibleCount(4);
-  }, [selectedCategory]);
+    const sortedFeedbacks = feedbacks.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+    setFeedbacks(sortedFeedbacks);
+  }, [feedbacks]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +43,7 @@ function App() {
     try {
       const response = await createFeedback(newFeedback);
       if (response) {
-        setFeedbacks([response.feedback, ...feedbacks]);
+        setFeedbacks([...feedbacks, response.feedback]);
         setText("");
         setCategory("Cours");
         setResponseMesssage(response.message);

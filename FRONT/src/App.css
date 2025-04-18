@@ -59,7 +59,7 @@ form {
 }
 
 .feedback-textarea {
-  padding: none;
+  padding: 10px;
   width: 100%;
   font-size: 1rem;
   border-radius: 8px;
@@ -133,9 +133,9 @@ form {
   width: 200px;
   height: 200px;
   margin: 10px;
-  box-shadow: 6px 6px 40px -7px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 6px 6px 40px -7px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 6px 6px 40px -7px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 3px 15px -5px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 3px 15px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 3px 15px -5px rgba(0, 0, 0, 0.75);
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
