@@ -10,7 +10,7 @@ function App() {
   const [category, setCategory] = useState("Cours");
   const [selectedCategory, setSelectedCategory] = useState("Tous");
   const [responseMessage, setResponseMesssage] = useState("");
-  const [visibleCount, setVisibleCount] = useState(3); 
+  const [visibleCount, setVisibleCount] = useState(4);
 
   useEffect(() => {
     async function fetchData() {
@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setVisibleCount(3);
+    setVisibleCount(4);
   }, [selectedCategory]);
 
   const handleSubmit = async (e) => {
@@ -66,86 +66,86 @@ function App() {
   return (
     <div className="app-container">
       <div className="feedback-wrapper">
-        <h1 className="feedback-title">Feedback Anonyme</h1>
-
-        <form onSubmit={handleSubmit} className="feedback-form">
-          <div className="form-group">
-            <label>
-              Choisis une catégorie :
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="feedback-select"
-              >
-                {categories.slice(1).map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <textarea
-            placeholder="Laisse ton feedback ici..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            rows="4"
-            className="feedback-textarea"
-          />
-          <div className="center flex-col">
-            <button type="submit" className="submit-button">
-              Envoyer
-            </button>
-            <div className="error-message">
-              {responseMessage && <p>{responseMessage}</p>}
+        <div className="form-wrapper">
+          <h1 className="feedback-title">Feedback Anonyme</h1>
+          <form onSubmit={handleSubmit} className="feedback-form">
+            <div className="form-group">
+              <label>
+                Choisis une catégorie :
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="feedback-select"
+                >
+                  {categories.slice(1).map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
-          </div>
-        </form>
-
-        <div className="filter-section">
-          <label>
-            Filtrer par catégorie :
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="feedback-select"
-            >
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        <div className="feedback-list">
-          <h2 className="feedback-count">
-            {filteredFeedbacks.length} feedback(s)
-          </h2>
-
-          {displayedFeedbacks.map((fb, index) => (
-            <div key={index} className="feedback-card">
-              <p className="feedback-date">
-                {new Date(fb.createdAt).toLocaleString("fr-FR")}
-              </p>
-              <p className="feedback-text">{fb.text}</p>
-              <p className="feedback-category">
-                <span className="category-sticker">{fb.category}</span>
-              </p>
-            </div>
-          ))}
-
-          {visibleCount < filteredFeedbacks.length && (
-            <div className="center">
-              <button
-                className="show-more-button"
-                onClick={() => setVisibleCount((prev) => prev + 3)}
-              >
-                Afficher plus
+            <textarea
+              placeholder="Laisse ton feedback ici..."
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              rows="4"
+              className="feedback-textarea"
+            />
+            <div className="center flex-col">
+              <button type="submit" className="submit-button">
+                Envoyer
               </button>
+              <div className="error-message">
+                {responseMessage && <p>{responseMessage}</p>}
+              </div>
             </div>
-          )}
+          </form>
+        </div>
+        <div className="wall-wrapper">
+          <div className="feedback-list">
+            <h2 className="feedback-title">Mur des feedbacks</h2>
+            <div className="filter-section">
+              <label>
+                Filtrer par catégorie :
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="feedback-select"
+                >
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <div className="cards-wrapper">
+              {displayedFeedbacks.map((fb, index) => (
+                <div key={index} className="feedback-card">
+                  <p className="feedback-date">
+                    {new Date(fb.createdAt).toLocaleString("fr-FR")}
+                  </p>
+                  <p className="feedback-text">{fb.text}</p>
+                  <p className="feedback-category">
+                    <span className="category-sticker">{fb.category}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {visibleCount < filteredFeedbacks.length && (
+              <div className="center">
+                <button
+                  className="show-more-button"
+                  onClick={() => setVisibleCount((prev) => prev + 4)}
+                >
+                  Afficher plus
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
