@@ -144,9 +144,13 @@ form {
   font-family: "Courier New", Courier, monospace;
   font-size: 0.8rem;
 }
-.feedback-category {
+/* .feedback-category {
+} */
+.submit-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #ccc;
 }
-
 .center {
   display: flex;
   justify-content: center;

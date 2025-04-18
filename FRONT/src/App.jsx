@@ -11,7 +11,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("Tous");
   const [responseMessage, setResponseMesssage] = useState("");
   const [visibleCount, setVisibleCount] = useState(4);
-  
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -91,7 +91,14 @@ function App() {
               className="feedback-textarea"
             />
             <div className="center flex-col">
-              <button type="submit" className="submit-button">
+              <button
+                type="submit"
+                className={`submit-button ${
+                  text.trim().length < 8 ? "disabled" : ""
+                }`}
+                disabled={text.trim().length < 8}
+                aria-disabled={text.trim().length < 8}
+              >
                 Envoyer
               </button>
               <div className="error-message">
