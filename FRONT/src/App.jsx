@@ -10,6 +10,7 @@ function App() {
   const [category, setCategory] = useState("Cours");
   const [selectedCategory, setSelectedCategory] = useState("Tous");
   const [responseMessage, setResponseMesssage] = useState("");
+  const [visibleCount, setVisibleCount] = useState(3); // 👈 Nombre affiché
 
   useEffect(() => {
     async function fetchData() {
@@ -29,6 +30,11 @@ function App() {
     fetchData();
   }, []);
 
+  // 👇 Reset visibleCount quand on change de filtre
+  useEffect(() => {
+    setVisibleCount(3);
+  }, [selectedCategory]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!text.trim()) return;
@@ -39,8 +45,6 @@ function App() {
     };
     try {
       const response = await createFeedback(newFeedback);
-      console.log(response);
-
       if (response) {
         setFeedbacks([response.feedback, ...feedbacks]);
         setText("");
@@ -52,10 +56,13 @@ function App() {
       alert("Une erreur est survenue lors de l’envoi du feedback.");
     }
   };
+
   const filteredFeedbacks =
     selectedCategory === "Tous"
       ? feedbacks
       : feedbacks.filter((fb) => fb.category === selectedCategory);
+
+  const displayedFeedbacks = filteredFeedbacks.slice(0, visibleCount); // 👈 Feedbacks affichés
 
   return (
     <div className="app-container">
@@ -117,18 +124,29 @@ function App() {
           <h2 className="feedback-count">
             {filteredFeedbacks.length} feedback(s)
           </h2>
-          {filteredFeedbacks.map((fb, index) => (
+
+          {displayedFeedbacks.map((fb, index) => (
             <div key={index} className="feedback-card">
               <p className="feedback-date">
                 {new Date(fb.createdAt).toLocaleString("fr-FR")}
               </p>
               <p className="feedback-text">{fb.text}</p>
-
               <p className="feedback-category">
                 <span className="category-sticker">{fb.category}</span>
               </p>
             </div>
           ))}
+
+          {visibleCount < filteredFeedbacks.length && (
+            <div className="center">
+              <button
+                className="show-more-button"
+                onClick={() => setVisibleCount((prev) => prev + 3)}
+              >
+                Afficher plus
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
