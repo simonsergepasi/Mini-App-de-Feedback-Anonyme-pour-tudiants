@@ -65,7 +65,7 @@ function App() {
         <form onSubmit={handleSubmit} className="feedback-form">
           <div className="form-group">
             <label>
-              Catégorie :
+              Choisis une catégorie :
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}

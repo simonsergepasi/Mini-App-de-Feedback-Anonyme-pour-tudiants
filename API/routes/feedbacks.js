@@ -2,9 +2,11 @@ const express = require("express");
 const {
   createFeedback,
   getFeedbacks,
-} = require("../controllers/feedback-controller");
+} = require("../controllers/feedbackController");
+
+const { verifyFeedback } = require("../middlewares/feedbacks");
 const router = express.Router();
-router.post("/", createFeedback);
+router.post("/", verifyFeedback, createFeedback);
 router.get("/", getFeedbacks);
 
 module.exports = router;

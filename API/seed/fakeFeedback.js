@@ -10,10 +10,10 @@ const categories = ["Cours", "Organisation", "Autre"];
 async function seedDB() {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("✅ Connecté à MongoDB");
+    console.log("Connecté à MongoDB");
 
     await Feedback.deleteMany({});
-    console.log("🧹 Anciennes données supprimées");
+    console.log("Anciennes données supprimées");
 
     const fakeFeedbacks = Array.from({ length: 30 }, () => ({
       text: faker.lorem.sentence({ min: 8, max: 15 }),

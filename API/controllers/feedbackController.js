@@ -1,4 +1,4 @@
-const Feedback = require("../models/feedback.schema");
+const Feedback = require("../models/feedbackSchema");
 
 const getFeedbacks = async (req, res) => {
   console.log(req.body);
@@ -17,12 +17,10 @@ const createFeedback = async (req, res) => {
   try {
     const feedback = new Feedback({ text, category });
     await feedback.save();
-    res
-      .status(200)
-      .json({
-        message: "Votre feedback a bien été pris en compte !",
-        feedback: feedback,
-      });
+    res.status(200).json({
+      message: "Votre feedback a bien été pris en compte !",
+      feedback,
+    });
   } catch (error) {
     console.error("Erreur lors de l'envoi du formulaire:", error);
     res.status(500).json({ message: "Erreur lors de l'envoi du formulaire." });

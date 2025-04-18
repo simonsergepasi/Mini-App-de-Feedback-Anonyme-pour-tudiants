@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
+const connectDB = require("./db/db");
 const port = process.env.PORT || 4000;
 const feedbackRoutes = require("./routes/feedbacks");
 const cors = require("cors");
@@ -13,11 +13,9 @@ app.use(
   })
 );
 app.use("/api/feedbacks", feedbackRoutes);
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`connected to db and listening on port : ${port}`);
-    });
-  })
-  .catch((err) => console.log(err));
+
+connectDB().then(() => {
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+});
