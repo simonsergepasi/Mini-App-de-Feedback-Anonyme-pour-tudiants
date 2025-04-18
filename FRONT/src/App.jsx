@@ -26,12 +26,6 @@ function App() {
     }
     fetchData();
   }, []);
-  useEffect(() => {
-    const sortedFeedbacks = feedbacks.sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
-    setFeedbacks(sortedFeedbacks);
-  }, [feedbacks]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,10 +49,11 @@ function App() {
     }
   };
 
-  const filteredFeedbacks =
+  const filteredFeedbacks = (
     selectedCategory === "Tous"
       ? feedbacks
-      : feedbacks.filter((fb) => fb.category === selectedCategory);
+      : feedbacks.filter((fb) => fb.category === selectedCategory)
+  ).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const displayedFeedbacks = filteredFeedbacks.slice(0, visibleCount);
 
